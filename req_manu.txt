@@ -1,0 +1,14 @@
+#you can download any torch version and cuda version in official web
+pip install torch==2.4.0+cu124 torchvision==0.19.0+cu124 torchaudio==2.4.0+cu124 --extra-index-url https://download.pytorch.org/whl/cu124
+
+pip install opencv-python
+
+pip install scikit-learn
+
+pip install timm matplotlib medpy pandas albumentations tensorboardX
+
+pip install "numpy==1.26.4"
+
+pip install tensorboard
+
+pip install einops
