@@ -1,0 +1,11 @@
+opencv-python
+scikit-learn
+timm
+matplotlib
+medpy
+pandas
+albumentations
+tensorboardX
+numpy==1.26.4
+tensorboard
+einops
