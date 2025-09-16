@@ -519,7 +519,9 @@ def main():
         mask_ext = '.png'
     elif dataset_name == 'cvc':
         mask_ext = '.png'
-    #TODU
+    elif dataset_name == 'isic':
+        img_ext = '.jpg'
+        mask_ext = '.png'
 
     # Data loading code
     img_ids = sorted(glob(os.path.join(config['data_dir'], config['dataset'], 'images', '*' + img_ext)))
