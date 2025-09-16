@@ -487,6 +487,7 @@ class MY_Unet(nn.Module):
         x = self.dnorm3(x)
         x = x.reshape(B, H, W, -1).permute(0, 3, 1, 2).contiguous()
 
+        ### Stage 3
         out = F.relu(F.interpolate(self.decoder2(x),scale_factor=(2,2),mode ='bilinear'))
         out_x1 = F.relu(F.interpolate(self.decoder2_x1(self.decoder2_eca(x)),scale_factor=(2,2),mode ='bilinear'))
         x = torch.add(out, out_x1)
@@ -499,16 +500,18 @@ class MY_Unet(nn.Module):
         x = self.dnorm4(x)
         x = x.reshape(B, H, W, -1).permute(0, 3, 1, 2).contiguous()
 
+        ### Stage 2
         out = F.relu(F.interpolate(self.decoder3(x),scale_factor=(2,2),mode ='bilinear'))
         out_x1 = F.relu(F.interpolate(self.decoder3_x1(self.decoder3_eca(x)),scale_factor=(2,2),mode ='bilinear'))
         x = torch.add(out, out_x1)
         x = torch.add(x, t2)
 
+        ### Stage 1
         out = F.relu(F.interpolate(self.decoder4(x),scale_factor=(2,2),mode ='bilinear'))
         out_x1 = F.relu(F.interpolate(self.decoder4_x1(self.decoder4_eca(x)),scale_factor=(2,2),mode ='bilinear'))
         x = torch.add(out, out_x1)
         x = torch.add(x, t1)
-        
+
         x = F.relu(F.interpolate(self.decoder5(self.decoder5_eca(x)),scale_factor=(2,2),mode ='bilinear'))
 
         return self.final(x)
